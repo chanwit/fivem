@@ -1,8 +1,7 @@
-[hub]: https://hub.docker.com/r/spritsail/fivem
-[git]: https://github.com/spritsail/fivem
-[drone]: https://drone.spritsail.io/spritsail/fivem
+[hub]: https://hub.docker.com/r/chanwit/fivem
+[git]: https://github.com/chanwit/fivem
 
-# [spritsail/fivem][hub]
+# [chanwit/fivem][hub]
 
 [![](https://images.microbadger.com/badges/image/spritsail/fivem.svg)](https://microbadger.com/images/spritsail/fivem)
 [![Latest Version](https://images.microbadger.com/badges/version/spritsail/fivem.svg)][hub]
@@ -24,15 +23,16 @@ A freely obtained license key is required to use this server, which should be de
 Use the `docker-compose` script provided if you wish to run a couchdb server with FiveM, else use the line below:
 
 ```sh
-docker run -d \
-  --name FiveM \
+export LICENSE_KEY=<your license key>
+
+docker run -d -it \
+  --name fivem \
   --restart=on-failure \
-  -e LICENSE_KEY=<your-license-here> \
-  -p 30120:30120 \
+  -e LICENSE_KEY=$LICENSE_KEY \
+  -p 30120:30120/tcp \
   -p 30120:30120/udp \
   -v /volumes/fivem:/config \
-  -ti \
-  spritsail/fivem
+  chanwit/fivem
 ```
 
 _It is important that you use `interactive` and `pseudo-tty` options otherwise the container will crash on startup_
